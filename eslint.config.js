@@ -6,16 +6,24 @@ import pluginReactConfig from "eslint-plugin-react/configs/recommended.js";
 import localPlugin from "./eslint-rules/index.js";
 
 export default [
+  // ✅ آبجکت جدید برای نادیده گرفتن پوشه‌ها
+  // این باید در بالاترین سطح باشد
+  {
+    ignores: [
+      "dist/", // نادیده گرفتن پوشه بیلد
+      "scripts/", // نادیده گرفتن پوشه اسکریپت‌های سفارشی
+    ],
+  },
+
   { files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"] },
   { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    // ✅ این آبجکت را برای تنظیمات React اضافه می‌کنیم
     ...pluginReactConfig,
     settings: {
       react: {
-        version: "detect", // به صورت خودکار نسخه React را تشخیص می‌دهد
+        version: "detect",
       },
     },
   },
